@@ -10,21 +10,34 @@ function Square(props) {
   );
 }
 
+function WinningSquare(props) {
+  return (
+    <button className="winning-square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+}
+
 class Board extends React.Component {
   renderSquare(i) {
     var squareValue = (this.props.squares[i])
     const winnerSquare = this.props.winnerSquares.includes(i)
 
     if (winnerSquare) {
-      squareValue = squareValue + '*';
-    }    
-
-    return ( 
-      <Square
-        value={squareValue}
-        onClick={() => this.props.onClick(i)}
-       />
-    );
+      return ( 
+        <WinningSquare
+          value={squareValue}
+          onClick={() => this.props.onClick(i)}
+         />
+      );
+    } else {
+      return ( 
+        <Square
+          value={squareValue}
+          onClick={() => this.props.onClick(i)}
+         />
+      );
+    }
   }
 
   render() {
